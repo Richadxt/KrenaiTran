@@ -1,0 +1,42 @@
+package com.example.demo.module;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping(path = "/employee")
+public class EmployeeController {
+	
+	@Autowired
+	private EmployeeService service;
+	
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity get(
+			@RequestParam(name = "salary", defaultValue = "0") double salary,
+			@RequestParam(name = "ages", defaultValue = "") List<Integer> ages
+
+			) {
+				
+		return service.get(salary, ages);
+	}
+	
+	@RequestMapping(path="/save-emp", method = RequestMethod.POST)
+	public ResponseEntity saveEmployeeAddress(@RequestBody EmpRequest req) {
+		return service.saveEmp(req);
+	}
+	
+	@RequestMapping(path="/save-address", method = RequestMethod.POST)
+	public ResponseEntity saveEmployeeAddress(@RequestBody AddressRequest addressRequest) {
+		return service.saveAddress(addressRequest);
+	}
+	
+	
+}

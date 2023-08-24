@@ -1,0 +1,24 @@
+package com.example.demo.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example.demo.entity.City;
+import com.example.demo.entity.Country;
+import com.example.demo.entity.State;
+import com.example.demo.entity.Village;
+
+public interface repositoryInterface {
+
+	public interface CountryRepository extends JpaRepository<Country, Long> {
+	}
+
+	public interface StateRepository extends JpaRepository<State, Long> {
+	}
+
+	public interface CityRepository extends JpaRepository<City, Long> {
+	}
+
+	public interface VillageRepository extends JpaRepository<Village, Long> {
+	}
+
+}

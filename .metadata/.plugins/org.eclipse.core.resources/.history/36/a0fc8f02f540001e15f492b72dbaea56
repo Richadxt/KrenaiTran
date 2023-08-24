@@ -1,0 +1,128 @@
+package com.example.demo.module;
+
+import java.time.ZonedDateTime;
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.entities.User;
+
+@Service
+public class UserService {
+	
+    private final UserRepository employeeRepository;
+
+    @Autowired
+    public UserService(UserRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
+
+    public List<User> getAllEmployees() {
+        return employeeRepository.findAll();
+    }
+
+    public User getEmployeeById(Long id) {
+        return employeeRepository.findById(id).orElse(null);
+    }
+
+    public User createEmployee(User employee) {
+        return employeeRepository.save(employee);
+    }
+
+    public void updateEmployee(User employee) {
+        employeeRepository.save(employee);
+    }
+
+    public void deleteEmployee(Long id) {
+        employeeRepository.deleteById(id);
+    }
+    
+// ################################################################3
+    
+        public List<User> findByName(String name) {
+            return employeeRepository.findByName(name);
+        }
+
+        public List<User> findTop3ByAge() {
+            return employeeRepository.findTop3ByAge();
+        }
+
+        public List<User> findByNameIs(String name) {
+            return employeeRepository.findByNameIs(name);
+        }
+        
+        public List<User> findByNameEquals (String name) {
+            return employeeRepository.findByNameEquals(name);
+        }
+        
+        public List<User> findByNameIsNot(String name) {
+            return employeeRepository.findByNameIsNot(name);
+        }
+        
+        public List<User> findByNameIsNull () {
+            return employeeRepository.findByNameIsNull();
+        }
+        
+        public List<User> findByNameIsNotNull () {
+            return employeeRepository.findByNameIsNotNull();
+        }
+        
+        public List<User> findByNameStartingWith (String prefix){
+            return employeeRepository.findByNameStartingWith(prefix);
+        }
+        
+        public List<User> findByNameEndingWith (String suffix) {
+            return employeeRepository.findByNameEndingWith(suffix);
+        }
+        
+        public List<User> findByNameContaining (String infix){
+            return employeeRepository.findByNameContaining(infix);
+        }
+        
+        public List<User> findByNameLike (String likePattern) {
+            return employeeRepository.findByNameLike(likePattern);
+        }
+        
+        public List<User> findByAgeLessThan (Integer age) {
+            return employeeRepository.findByAgeLessThan(age);
+        }
+        
+        public List<User> findByAgeLessThanEqual (Integer age){
+            return employeeRepository.findByAgeLessThanEqual(age);
+        }
+        
+        public List<User> findByAgeGreaterThan (Integer age){
+            return employeeRepository.findByAgeGreaterThan(age);
+        }
+        
+        public List<User> findByAgeGreaterThanEqual (Integer age) {
+            return employeeRepository.findByAgeGreaterThanEqual(age);
+        }
+        
+        public List<User> findByAgeBetween (Integer startAge, Integer endAge){
+            return employeeRepository.findByAgeBetween(startAge, endAge);
+        }
+
+        public List<User> findByAgeIn(Collection<Integer> ages) {
+            return employeeRepository.findByAgeIn(ages);
+        }
+
+        public List<User> findByBirthDateAfter(ZonedDateTime birthDate) {
+            return employeeRepository.findByBirthDateAfter(birthDate);
+        }
+
+        public List<User> findByBirthDateBefore(ZonedDateTime birthDate) {
+            return employeeRepository.findByBirthDateBefore(birthDate);
+        }
+
+        public List<User> findByNameOrBirthDate(String name, ZonedDateTime birthDate) {
+            return employeeRepository.findByNameOrBirthDate(name, birthDate);
+        }
+
+        public List<User> findByNameOrBirthDateAndActive(String name, ZonedDateTime birthDate, Boolean active) {
+        	return employeeRepository.findByNameOrBirthDateAndActive(name, birthDate, active);
+        }
+  
+}

@@ -1,0 +1,84 @@
+package com.example.demo.module;
+
+import java.time.ZonedDateTime;
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.entities.Employee;
+
+@Service
+public class EmployeeService {
+	
+    private final EmployeeRepository employeeRepository;
+
+    @Autowired
+    public EmployeeService(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
+
+    // CRUD operations
+    public List<Employee> getAllEmployees() {
+        return employeeRepository.findAll();
+    }
+
+    public Employee getEmployeeById(Long id) {
+        return employeeRepository.findById(id).orElse(null);
+    }
+
+    public Employee createEmployee(Employee employee) {
+        return employeeRepository.save(employee);
+    }
+
+    public void updateEmployee(Employee employee) {
+        employeeRepository.save(employee);
+    }
+
+    public void deleteEmployee(Long id) {
+        employeeRepository.deleteById(id);
+    }
+
+    // Custom methods
+//    public List<Employee> getEmployeesByAgeAndSalary(int age, double salary) {
+//        return employeeRepository.findByAgeAndSalary(age, salary);
+//    }
+    
+
+        public List<Employee> findByName(String name) {
+            return employeeRepository.findByName(name);
+        }
+
+        public List<Employee> findTop3ByAge() {
+            return employeeRepository.findTop3ByAge();
+        }
+
+        public List<Employee> findByNameIs(String name) {
+            return employeeRepository.findByNameIs(name);
+        }
+
+        // Add implementations for the rest of the methods
+        // ...
+
+        public List<Employee> findByAgeIn(Collection<Integer> ages) {
+            return employeeRepository.findByAgeIn(ages);
+        }
+
+        public List<Employee> findByBirthDateAfter(ZonedDateTime birthDate) {
+            return employeeRepository.findByJoiningDateAfter(birthDate);
+        }
+
+        public List<Employee> findByBirthDateBefore(ZonedDateTime birthDate) {
+            return employeeRepository.findByJoiningDateBefore(birthDate);
+        }
+
+        public List<Employee> findByNameOrBirthDate(String name, ZonedDateTime birthDate) {
+            return employeeRepository.findByNameOrJoiningDate(name, birthDate);
+        }
+
+        public List<Employee> findByNameOrBirthDateAndActive(String name, ZonedDateTime birthDate, Boolean active) {
+            // Implement as needed
+        }
+  
+}

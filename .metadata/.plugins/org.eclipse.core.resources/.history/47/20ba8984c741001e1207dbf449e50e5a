@@ -1,0 +1,14 @@
+package com.example.demo.entity;
+
+@Data
+@Entity
+public class Employee {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer id;
+	private String name;
+	private Integer age;
+	private Double salary;
+	private Date joiningDate;
+
+}

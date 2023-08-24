@@ -1,0 +1,45 @@
+package com.example.demo.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.repository.repositoryInterface.CountryRepository;
+
+@RestController
+@RequestMapping("/cities")
+public class City_controller {
+	    @Autowired
+	    private CountryRepository countryRepository;
+
+	    // Define CRUD operations using @GetMapping, @PostMapping, @PutMapping, @DeleteMapping
+	}
+
+	@RestController
+	@RequestMapping("/states")
+	public class StateController {
+	    @Autowired
+	    private StateRepository stateRepository;
+
+	    // Define CRUD operations
+	}
+
+	@RestController
+	@RequestMapping("/districts")
+	public class DistrictController {
+	    @Autowired
+	    private DistrictRepository districtRepository;
+
+	    // Define CRUD operations
+	}
+
+	@RestController
+	@RequestMapping("/villages")
+	public class VillageController {
+	    @Autowired
+	    private VillageRepository villageRepository;
+
+	    // Define CRUD operations
+	}
+
+}

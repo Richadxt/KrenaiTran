@@ -1,0 +1,40 @@
+package com.example.demo.controller;
+
+public class City_controller {
+	@RestController
+	@RequestMapping("/countries")
+	public class CountryController {
+	    @Autowired
+	    private CountryRepository countryRepository;
+
+	    // Define CRUD operations using @GetMapping, @PostMapping, @PutMapping, @DeleteMapping
+	}
+
+	@RestController
+	@RequestMapping("/states")
+	public class StateController {
+	    @Autowired
+	    private StateRepository stateRepository;
+
+	    // Define CRUD operations
+	}
+
+	@RestController
+	@RequestMapping("/districts")
+	public class DistrictController {
+	    @Autowired
+	    private DistrictRepository districtRepository;
+
+	    // Define CRUD operations
+	}
+
+	@RestController
+	@RequestMapping("/villages")
+	public class VillageController {
+	    @Autowired
+	    private VillageRepository villageRepository;
+
+	    // Define CRUD operations
+	}
+
+}

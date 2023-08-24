@@ -1,0 +1,9 @@
+package com.example.demo.exception;
+
+@NoArgsCo
+public class AuthorizationException extends RuntimeException{
+	
+	
+	
+
+}

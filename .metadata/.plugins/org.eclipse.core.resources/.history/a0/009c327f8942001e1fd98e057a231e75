@@ -1,0 +1,10 @@
+package com.example.demo.module;
+
+public interface LoginRepository {
+
+	import org.springframework.data.jpa.repository.JpaRepository;
+
+	public interface LoginRepository extends JpaRepository<Login, Long> {
+	}
+
+}

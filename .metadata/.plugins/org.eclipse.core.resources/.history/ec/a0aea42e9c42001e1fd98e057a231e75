@@ -1,0 +1,17 @@
+package com.example.demo.module;
+
+@RestController
+@RequestMapping("/admins")  // Change the request mapping
+public class AdminController {  // Change the class name
+
+    @Autowired
+    private AdminService adminService;  // Change the variable name
+
+    @PostMapping("/register")
+    public ResponseEntity<Admin> registerAdmin(@RequestBody Admin admin){  // Change the parameter type and variable name
+        return new ResponseEntity<Admin>(adminService.registerAdmin(admin), HttpStatus.CREATED);  // Change the return type and variable name
+    }
+}
+
+
+}

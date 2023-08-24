@@ -1,0 +1,15 @@
+package com.demo.service;
+
+import com.demo.exception.EmployeeException;
+import com.demo.model.Employee;
+
+public interface EmployeeService {
+	// CRUD 
+   public Employee registerEmployee(Employee employee) throws EmployeeException;
+   
+   public Employee getEmployee(Integer id) throws EmployeeException;
+   
+   public Employee updateEmployee(Integer id, Employee employee) throws EmployeeException;
+   
+   public Employee deleteEmployee(Integer id) throws EmployeeException;
+}

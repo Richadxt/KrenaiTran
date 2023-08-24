@@ -1,0 +1,8 @@
+package com.example.demo.entity;
+
+@Entity
+@Data
+public class Login {
+    @Id
+    @GeneratedValue
+}

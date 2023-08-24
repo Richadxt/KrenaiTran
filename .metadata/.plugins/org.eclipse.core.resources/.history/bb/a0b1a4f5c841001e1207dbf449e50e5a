@@ -1,0 +1,6 @@
+package com.example.demo.module;
+
+public interface AddressRepository extends JpaRepository<Address, Integer>{
+	public List<Address> findByCityAndStateAndPincodeAndEmployee_Salary(String city, String state, String pincode, Double salary);
+
+}

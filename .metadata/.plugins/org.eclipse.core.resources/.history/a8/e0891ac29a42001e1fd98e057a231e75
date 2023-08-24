@@ -1,0 +1,27 @@
+package com.example.demo.module;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.example.demo.entity.Employee;
+
+@Service
+public class EmployeeService {
+
+	
+	@Autowired
+	private EmployeeRepository employeeRepository;
+	
+	@Autowired
+	private AddressRepository addressRepository;
+	
+	@Autowired
+	private AcademicRepository academicRepository;
+	
+	@Autowired
+	private ExperienceRepository experienceRepository;
+	
+	public Employee registerEmployee(Employee employee) {
+		return employeeRepository.save(employee);
+	}
+	
+}

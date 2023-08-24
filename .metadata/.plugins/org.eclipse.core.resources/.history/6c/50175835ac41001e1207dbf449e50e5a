@@ -1,0 +1,62 @@
+package com.example.demo.module;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.entities.Address;
+import com.example.demo.entities.Employee;
+
+
+
+@Service
+public class EmployeeService {
+	
+	
+	@Autowired
+	private EmployeeJpaRepository employeeJpaRepository;
+	
+	@Autowired
+	private EmpAddressJpaRepository empAddressJpaRepository;
+	
+	
+	public ResponseEntity saveEmp(EmployeeRequest employeeRequest) {
+		
+		 EmployeeMapper mapper=new EmployeeMapper();
+		 Employee employee= mapper.map(employeeRequest);
+		 employeeJpaRepository.save(employee);
+		
+		return new ResponseEntity(employee, HttpStatus.ACCEPTED);
+	}
+	
+	
+	public ResponseEntity saveAddress(AddressRequest addressRequest) {
+		
+		 AddressMapper mapper=new AddressMapper();
+		 Address address= mapper.map(addressRequest);
+		 empAddressJpaRepository.save(address);
+		
+		return new ResponseEntity(address, HttpStatus.ACCEPTED);
+	}
+	
+	
+	public ResponseEntity get(double salary, List<Integer> ages) {
+		try {			
+			
+	List<Employee> employeeList = employeeJpaRepository.findByAgeInAndSalary(ages, salary);
+         
+		return new ResponseEntity(employeeList, HttpStatus.OK);
+        
+		}catch(Exception e) {
+			e.printStackTrace();
+			
+			 return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
+
+}

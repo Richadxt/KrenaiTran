@@ -1,0 +1,17 @@
+package com.example.demo.module;
+
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example.demo.entities.Address;
+
+public interface EmpAddressJpaRepository extends JpaRepository<Address, Long> {
+		
+
+		
+		List<Address> findByCityAndStateAndPinCodeAndEmployee_Salary(String city, String state, String pin, double salary);
+
+
+}

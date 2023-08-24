@@ -1,0 +1,62 @@
+package com.example.demo.module;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.entity.Employee;
+import com.example.demo.entity.Login;
+import com.example.demo.model.LoginRequest;
+
+@Service
+public class LoginService {
+	
+	@Autowired
+	private  AdminRepository adminRepository;
+	
+
+	@Autowired
+	private  LoginRepository loginRepository;
+	
+	
+	public Employee logInAdmin(LoginRequest request) {
+		
+        Admin existingAdmin = aDao.findByMobileNo(dto.getMobileNo());
+		
+		if(existingAdmin == null) {
+			throw new AuthorizationException("Please register your self first!");
+		}
+		
+		Optional<AdminCurrentSession> validAdmin = aSDao.findById(existingAdmin.getAdminId());
+		
+		if(validAdmin.isPresent()) {
+			throw new AuthorizationException("Customer already logged in!");
+		}
+		
+		if(existingAdmin.getPassword().equals(dto.getPassword())) {
+			
+			String key = RandomString.make(6);
+			
+			AdminCurrentSession adminCurrentSession = new AdminCurrentSession(existingAdmin.getAdminId(),key,LocalDateTime.now());
+			
+			aSDao.save(adminCurrentSession);
+			
+			return adminCurrentSession.toString();
+		}
+		else {
+			throw new AuthorizationException("Please enter a valid password!");
+		}
+	}
+	public String logOutAdmin(String uId) {
+		return null;
+	}
+	
+	
+	public List<Login> getAllLoginDetails() {
+        return loginRepository.findAll();
+    }
+	
+	
+	
+}

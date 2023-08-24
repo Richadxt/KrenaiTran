@@ -1,0 +1,164 @@
+package com.example.demo.module;
+
+import java.time.ZonedDateTime;
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.entities.Employee;
+
+@RestController
+@RequestMapping("/employees")
+public class EmployeeController {
+    private final EmployeeService employeeService;
+
+    @Autowired
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
+
+    @GetMapping("/getemployees")
+    public List<Employee> getAllEmployees() {
+        return employeeService.getAllEmployees();
+    }
+
+    @GetMapping("/{id}")
+    public Employee getEmployeeById(@PathVariable Long id) {
+        return employeeService.getEmployeeById(id);
+    }
+
+    @PostMapping("/register")
+    public Employee createEmployee(@RequestBody Employee employee) {
+        return employeeService.createEmployee(employee);
+    }
+
+    @PutMapping("/update")
+    public void updateEmployee(@RequestBody Employee employee) {
+        employeeService.updateEmployee(employee);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteEmployee(@PathVariable Long id) {
+        employeeService.deleteEmployee(id);
+    }
+    
+    // ###################################################################
+
+    @GetMapping("/name/{name}")
+    public List<Employee> findEmployeesByName(@PathVariable String name) {
+        return employeeService.findByName(name);
+    }
+
+    @GetMapping("/top3ByAge/{num}")
+    public List<Employee> findTop3EmployeesByAge(@PathVariable Integer num) {
+        return employeeService.findTop3ByAge(num);
+    }
+
+    @GetMapping("/nameIs/{name}")
+    public List<Employee> findEmployeesByNameIs(@PathVariable String name) {
+        return employeeService.findByNameIs(name);
+    }
+
+    @GetMapping("/nameEquals/{name}")
+    public List<Employee> findEmployeesByNameEquals(@PathVariable String name) {
+        return employeeService.findByNameEquals(name);
+    }
+
+    @GetMapping("/nameIsNot/{name}")
+    public List<Employee> findEmployeesByNameIsNot(@PathVariable String name) {
+        return employeeService.findByNameIsNot(name);
+    }
+
+    @GetMapping("/nameIsNull")
+    public List<Employee> findEmployeesByNameIsNull() {
+        return employeeService.findByNameIsNull();
+    }
+
+    @GetMapping("/nameIsNotNull")
+    public List<Employee> findEmployeesByNameIsNotNull() {
+        return employeeService.findByNameIsNotNull();
+    }
+
+    @GetMapping("/nameIsStartingWith/{prefix}")
+    public List<Employee> findEmployeesByNameStartingWith(@PathVariable String prefix) {
+        return employeeService.findByNameStartingWith(prefix);
+    }
+
+    @GetMapping("/nameEndingWith/{suffix}")
+    public List<Employee> findEmployeesByNameEndingWith(@PathVariable String suffix) {
+        return employeeService.findByNameEndingWith(suffix);
+    }
+
+    @GetMapping("/nameContaining/{infix}")
+    public List<Employee> findEmployeesByNameContaining(@PathVariable String infix) {
+        return employeeService.findByNameContaining(infix);
+    }
+
+    @GetMapping("/nameLike/{likePattern}")
+    public List<Employee> findEmployeesByNameLike(@PathVariable String likePattern) {
+        return employeeService.findByNameLike(likePattern);
+    }
+
+    @GetMapping("/ageLessThan/{age}")
+    public List<Employee> findEmployeesByAgeLessThan(@PathVariable Integer age) {
+        return employeeService.findByAgeLessThan(age);
+    }
+
+    @GetMapping("/ageLessThanEqual/{age}")
+    public List<Employee> findEmployeesByAgeLessThanEqual(@PathVariable Integer age) {
+        return employeeService.findByAgeLessThanEqual(age);
+    }
+
+    @GetMapping("/ageGreaterThan/{age}")
+    public List<Employee> findEmployeesByAgeGreaterThan(@PathVariable Integer age) {
+        return employeeService.findByAgeGreaterThan(age);
+    }
+
+    @GetMapping("/ageGreaterThanEqual/{age}")
+    public List<Employee> findEmployeesByAgeGreaterThanEqual(@PathVariable Integer age) {
+        return employeeService.findByAgeGreaterThanEqual(age);
+    }
+
+    @GetMapping("/AgeBetween/{startAge}/{endAge}")
+    public List<Employee> findEmployeesByAgeBetween(@PathVariable Integer startAge, @PathVariable Integer endAge) {
+        return employeeService.findByAgeBetween(startAge, endAge);
+    }
+
+//   
+    @GetMapping("/nameIsAgeIn/{name}")
+    public List<Employee> findEmployeesByAgeIn(@RequestParam(name = "ages") List<Integer> ages) {
+        return employeeService.findByAgeIn(ages);
+    }
+
+
+    @GetMapping("/birthDateAfter/{birthDate}")
+    public List<Employee> findEmployeesByBirthDateAfter(@PathVariable String birthDate) {
+        return employeeService.findByBirthDateAfter(ZonedDateTime.parse(birthDate));
+    }
+
+    @GetMapping("/birthDateBefore/{birthDate}")
+    public List<Employee> findEmployeesByBirthDateBefore(@PathVariable  String birthDate) {
+        return employeeService.findByBirthDateBefore(ZonedDateTime.parse(birthDate));
+    }
+
+    @GetMapping("/nameOrBirthDate/{name}/{birthDate}")
+    public List<Employee> findEmployeesByNameOrBirthDate(@PathVariable String name, @PathVariable String birthDate) {
+        return employeeService.findByNameOrBirthDate(name, ZonedDateTime.parse(birthDate));
+    }
+
+    @GetMapping("/nameOrBirthDateAndActive/{name}/{birthDate}/{active}")
+    public List<Employee> findEmployeesByNameOrBirthDateAndActive(
+            @PathVariable String name, @PathVariable String birthDate, @PathVariable Boolean active) {
+        return employeeService.findByNameOrBirthDateAndActive(name, ZonedDateTime.parse(birthDate), active);
+    }
+}

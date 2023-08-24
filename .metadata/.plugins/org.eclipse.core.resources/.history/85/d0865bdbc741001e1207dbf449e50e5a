@@ -1,0 +1,11 @@
+package com.example.demo.entity;
+
+@Data
+@Entity
+public class Experience {
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Integer id;
+    private String organization;
+    
+}

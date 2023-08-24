@@ -1,0 +1,143 @@
+package com.example.demo.module;
+
+import java.time.ZonedDateTime;
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.entities.Employee;
+
+@RestController
+@RequestMapping("/employees")
+public class EmployeeController {
+    private final EmployeeService employeeService;
+
+    @Autowired
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
+
+    @GetMapping("/")
+    public List<Employee> getAllEmployees() {
+        return employeeService.getAllEmployees();
+    }
+
+    @GetMapping("/{id}")
+    public Employee getEmployeeById(@PathVariable Long id) {
+        return employeeService.getEmployeeById(id);
+    }
+
+    @PostMapping("/")
+    public Employee createEmployee(@RequestBody Employee employee) {
+        return employeeService.createEmployee(employee);
+    }
+
+    @PutMapping("/")
+    public void updateEmployee(@RequestBody Employee employee) {
+        employeeService.updateEmployee(employee);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteEmployee(@PathVariable Long id) {
+        employeeService.deleteEmployee(id);
+    }
+    
+    // ###################################################################33
+
+        @GetMapping("/name/")
+        public List<Employee> findEmployeesByName(@RequestParam String name) {
+            return employeeService.findByName(name);
+        }
+        @GetMapping("/top3ByAge")
+        public List<Employee> findTop3EmployeesByAge() {
+            return employeeService.findTop3ByAge();
+        }
+        @GetMapping("/nameIs/")
+        public List<Employee> findEmployeesByNameIs(@RequestParam String name) {
+            return employeeService.findByNameIs(name);
+        }
+        @GetMapping("/nameEquals/")
+        public List<Employee> findEmployeesByNameEquals(@RequestParam String name) {
+            return employeeService.findByNameEquals(name);
+        }
+        @GetMapping("/nameIsNot/")
+        public List<Employee> findEmployeesByNameIsNot(@RequestParam String name) {
+            return employeeService.findByNameIsNot(name);
+        }
+        @GetMapping("/nameIsNull/")
+        public List<Employee> findEmployeesByNameIsNull() {
+            return employeeService.findByNameIsNull();
+        }
+        @GetMapping("/nameIsNotNull/")
+        public List<Employee> findEmployeesByNameIsNotNull() {
+            return employeeService.findByNameIsNotNull();
+        }
+        @GetMapping("/nameIsStartingWith/")
+        public List<Employee> findEmployeesByNameIsStartingWith(@RequestParam String prefix) {
+            return employeeService.findByNameStartingWith(prefix);
+        }
+        @GetMapping("/nameEndingWith/")
+        public List<Employee> findEmployeesByNameEndingWith(@RequestParam String suffix) {
+            return employeeService.findByNameEndingWith(suffix);
+        }
+        @GetMapping("/nameContaining/")
+        public List<Employee> findEmployeesByNameContaining(@RequestParam String infix) {
+            return employeeService.findByNameContaining(infix);
+        }
+        @GetMapping("/nameLike/")
+        public List<Employee> findEmployeesByNameLike(@RequestParam String likePattern) {
+            return employeeService.findByNameLike(likePattern);
+        }
+        @GetMapping("/ageLessThan/")
+        public List<Employee> findEmployeesByAgeLessThan(@RequestParam Integer age) {
+            return employeeService.findByAgeLessThan(age);
+        }
+        @GetMapping("/ageLessThanEqual/")
+        public List<Employee> findEmployeesByAgeLessThanEqual(@RequestParam Integer age) {
+            return employeeService.findByAgeLessThanEqual(age);
+        }
+        @GetMapping("/ageGreaterThan/")
+        public List<Employee> findEmployeesByAgeGreaterThan(@RequestParam Integer age) {
+            return employeeService.findByAgeGreaterThan(age);
+        }
+        @GetMapping("/ageGreaterThanEqual/")
+        public List<Employee> findEmployeesByAgeGreaterThanEqual(@RequestParam Integer age) {
+            return employeeService.findByAgeGreaterThanEqual(age);
+        }
+        @GetMapping("/AgeBetween/")
+        public List<Employee> findEmployeesByAgeBetween(@RequestParam Integer startAge, Integer endAge) {
+            return employeeService.findByAgeBetween(startAge, endAge);
+        }
+        @GetMapping("/nameIs/{name}")
+        public List<Employee> findEmployeesByAgeIn(@RequestParam Collection<Integer> ages) {
+            return employeeService.findByAgeIn(ages);
+        }
+        @GetMapping("/birthDateAfter/")
+        public List<Employee> findEmployeesByBirthDateAfetr(@RequestParam ZonedDateTime birthDate) {
+            return employeeService.findByBirthDateAfter(birthDate);
+        }
+        @GetMapping("/birthDateBefore/")
+        public List<Employee> findEmployeesByBirthDateBefore(@RequestParam ZonedDateTime birthDate) {
+            return employeeService.findByBirthDateBefore(birthDate);
+        }
+        @GetMapping("/nameOrBirthDate")
+        public List<Employee> findEmployeesByNameOrBirthDate(@RequestParam String name, @RequestParam ZonedDateTime birthDate) {
+            return employeeService.findByNameOrBirthDate(name, birthDate);
+        }
+        @GetMapping("/nameOrBirthDateAndActive")
+        public List<Employee> findEmployeesByNameOrBirthDateAndActive(
+                @RequestParam String name, @RequestParam ZonedDateTime birthDate, @RequestParam Boolean active) {
+            return employeeService.findByNameOrBirthDateAndActive(name, birthDate, active);
+        }
+}
+

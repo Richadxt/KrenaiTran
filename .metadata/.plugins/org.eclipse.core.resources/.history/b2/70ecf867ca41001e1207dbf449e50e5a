@@ -1,0 +1,39 @@
+package com.example.demo.module;
+
+@RestController
+public class EmployeeController {
+  
+	@Autowired
+	private EmployeeService employeeService;
+	
+	@PostMapping("/employees/upload")
+	public ResponseEntity<Employee> registerEmployee(@RequestBody Employee employee){
+		return new ResponseEntity<Employee>(employeeService.registerEmployee(employee),HttpStatus.CREATED);
+	}
+	
+	@PostMapping("/address/upload")
+	public ResponseEntity<Address> registerAddress(@RequestParam Integer id, @RequestBody Address address){
+		return new ResponseEntity<Address>(employeeService.registerAddress(id,address),HttpStatus.CREATED);
+	}
+	
+	@PostMapping("/academic/register")
+	public ResponseEntity<Academic> registerAcademic(@RequestParam Integer id, @RequestBody Academic academic){
+		return new ResponseEntity<Academic>(employeeService.registerAcademic(id,academic),HttpStatus.CREATED);
+	}
+	
+	@PostMapping("/experience/register")
+	public ResponseEntity<Experience> registerExperience(@RequestParam Integer id, @RequestBody Experience experience){
+		return new ResponseEntity<Experience>(employeeService.registerExperience(id,experience),HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/getaddressbydetails")
+	public ResponseEntity<List<Address>> getAddressByDetails(@RequestParam String city, @RequestParam String state, @RequestParam String pincode, @RequestParam Double salary){
+		return new ResponseEntity<List<Address>>(employeeService.getAddressByDetails(city, state, pincode, salary),HttpStatus.OK);
+	}
+	
+	@GetMapping("/getemployeebydetails")
+	public ResponseEntity<List<Employee>> getEmployeeByDetails(@RequestParam Integer age, @RequestParam Double salary, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date joiningDate){
+		return new ResponseEntity<List<Employee>>(employeeService.getEmployeeByDetails(age, salary, joiningDate),HttpStatus.OK);
+	}
+	
+}

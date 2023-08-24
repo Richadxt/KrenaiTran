@@ -1,0 +1,48 @@
+package com.demo.service;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.demo.exception.EmployeeException;
+import com.demo.model.Employee;
+import com.demo.repository.EmployeeRepository;
+
+
+@Service
+public class EmployeeServiceImp implements EmployeeService {
+ 
+	@Autowired
+	private EmployeeRepository employeeRepository;
+	
+	@Override
+	public Employee registerEmployee(Employee employee) throws EmployeeException {
+		// TODO Auto-generated method stub
+		Optional<Employee> existingEmployee=employeeRepository.findById(employee.getId());
+		
+		if(existingEmployee.isPresent()) {
+			throw new EmployeeException("Employee already registered with this id!");
+		}
+		return employeeRepository.save(employee);
+	}
+
+	@Override
+	public Employee getEmployee(Integer id) throws EmployeeException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Employee updateEmployee(Integer id, Employee employee) throws EmployeeException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Employee deleteEmployee(Integer id) throws EmployeeException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

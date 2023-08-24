@@ -1,0 +1,94 @@
+package com.example.demo.module;
+
+import java.time.ZonedDateTime;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.entities.Employee;
+
+@RestController
+@RequestMapping("/employees")
+public class EmployeeController {
+    private final EmployeeService employeeService;
+
+    @Autowired
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
+
+    @GetMapping("/")
+    public List<Employee> getAllEmployees() {
+        return employeeService.getAllEmployees();
+    }
+
+    @GetMapping("/{id}")
+    public Employee getEmployeeById(@PathVariable Long id) {
+        return employeeService.getEmployeeById(id);
+    }
+
+    @PostMapping("/")
+    public Employee createEmployee(@RequestBody Employee employee) {
+        return employeeService.createEmployee(employee);
+    }
+
+    @PutMapping("/")
+    public void updateEmployee(@RequestBody Employee employee) {
+        employeeService.updateEmployee(employee);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteEmployee(@PathVariable Long id) {
+        employeeService.deleteEmployee(id);
+    }
+
+    // Custom method endpoint
+//    @GetMapping("/custom")
+//    public List<Employee> getEmployeesByAgeAndSalary(@RequestParam int age, @RequestParam double salary) {
+//        return employeeService.getEmployeesByAgeAndSalary(age, salary);
+//    }
+   
+        @GetMapping("/name/{name}")
+        public List<Employee> findEmployeesByName(@PathVariable String name) {
+            return employeeService.findByName(name);
+        }
+
+        @GetMapping("/top3ByAge")
+        public List<Employee> findTop3EmployeesByAge() {
+            return employeeService.findTop3ByAge();
+        }
+
+        @GetMapping("/nameIs/{name}")
+        public List<Employee> findEmployeesByNameIs(@PathVariable String name) {
+            return employeeService.findByNameIs(name);
+        }
+
+        // Add mappings for the rest of the methods
+        // ...
+
+        @GetMapping("/birthDateBefore/{birthDate}")
+        public List<Employee> findEmployeesByBirthDateBefore(@PathVariable ZonedDateTime birthDate) {
+            return employeeService.findByBirthDateBefore(birthDate);
+        }
+
+        @GetMapping("/nameOrBirthDate")
+        public List<Employee> findEmployeesByNameOrBirthDate(@RequestParam String name, @RequestParam ZonedDateTime birthDate) {
+            return employeeService.findByNameOrBirthDate(name, birthDate);
+        }
+
+        @GetMapping("/nameOrBirthDateAndActive")
+        public List<Employee> findEmployeesByNameOrBirthDateAndActive(
+                @RequestParam String name, @RequestParam ZonedDateTime birthDate, @RequestParam Boolean active) {
+            return employeeService.findByNameOrBirthDateAndActive(name, birthDate, active);
+        }
+}
+

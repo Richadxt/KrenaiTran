@@ -1,0 +1,10 @@
+package com.example.demo.entity;
+
+@Entity
+@Data
+public class Academic {
+ 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integetr
+}

@@ -1,0 +1,58 @@
+package com.example.demo.module;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.entity.Employee;
+import com.example.demo.entity.Login;
+import com.example.demo.model.LoginRequest;
+
+@Service
+public class LoginService {
+
+	@Autowired
+	private  LoginRepository loginRepository;
+	
+	public Employee logInAdmin(LoginRequest request) {
+          Customer existingCustomer = cDao.findByMobileNo(dto.getMobileNo());
+		
+		if(existingCustomer == null) {
+			throw new AuthorizationException("Please register your self first!");
+		}
+		
+		Optional<CustomerCurrentSession> validCustomer = cSDao.findById(existingCustomer.getCustomerId());
+		
+		if(validCustomer.isPresent()) {
+			throw new AuthorizationException("Customer already logged in!");
+		}
+		
+		if(existingCustomer.getPassword().equals(dto.getPassword())) {
+			
+			String key = RandomString.make(6);
+			
+			CustomerCurrentSession customerCurrentSession = new CustomerCurrentSession(existingCustomer.getCustomerId(),key,LocalDateTime.now());
+			
+			cSDao.save(customerCurrentSession);
+			
+			return customerCurrentSession.toString();
+		}
+		else {
+			throw new AuthorizationException("Please enter a valid password!");
+		}
+		
+	}
+	
+	public String logOutAdmin(String uId) {
+		return null;
+	}
+	
+	
+	public List<Login> getAllLoginDetails() {
+        return loginRepository.findAll();
+    }
+	
+	
+	
+}

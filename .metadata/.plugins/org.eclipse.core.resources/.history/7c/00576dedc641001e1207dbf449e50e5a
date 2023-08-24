@@ -1,0 +1,9 @@
+package com.example.demo.entity;
+
+@Data
+@Entity
+public class Address {
+	@Id
+	@GeneratedValue(strategy=GenerationType)
+
+}

@@ -1,0 +1,33 @@
+package com.example.demo.module;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.entity.Employee;
+import com.example.demo.entity.Login;
+import com.example.demo.model.LoginRequest;
+
+@Service
+public class LoginService {
+
+	@Autowired
+	private  LoginRepository loginRepository;
+	
+	public Employee logInAdmin(LoginRequest request) {
+		return null;
+	}
+	
+	public Employee logInAdmin(LoginRequest request) {
+		return null;
+	}
+	
+	
+	public List<Login> getAllLoginDetails() {
+        return loginRepository.findAll();
+    }
+	
+	
+	
+}

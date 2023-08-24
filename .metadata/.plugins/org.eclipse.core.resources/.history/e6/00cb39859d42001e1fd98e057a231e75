@@ -1,0 +1,13 @@
+package com.example.demo.module;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example.demo.entity.Admin;
+
+public interface AdminRepository extends JpaRepository<Admin, Integer> {
+	
+	public Admin findByEmail(String email) {
+		
+	}
+
+}

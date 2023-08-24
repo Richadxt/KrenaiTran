@@ -1,0 +1,15 @@
+package com.example.demo.entity;
+
+@Data
+@Entity
+public class Address {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer id;
+	private String city;
+	private String pincode;
+	private String country;
+	
+	@Json
+
+}

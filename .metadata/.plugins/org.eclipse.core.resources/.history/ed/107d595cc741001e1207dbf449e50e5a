@@ -1,0 +1,11 @@
+package com.example.demo.entity;
+
+@Data
+@Entity
+public class Employee {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer id;
+	
+
+}

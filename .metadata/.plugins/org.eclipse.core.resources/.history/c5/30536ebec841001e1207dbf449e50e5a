@@ -1,0 +1,5 @@
+package com.example.demo.module;
+
+public interface EmployeeRepository {
+	public List<Employee> findByAgeAndSalaryAndJoiningDateBefore(Integer age, Double salary, Date joiningDate);
+}
